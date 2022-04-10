@@ -7,14 +7,23 @@
     sans-serif;
 }
 
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 body {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #292929;
   padding: 40px;
 }
 
-.container {
+.contactApp {
   background-color: #121212;
   box-shadow: 0px 5px 5px 0.1px #121212;
   color: #e2e2e2;
@@ -25,12 +34,12 @@ body {
   padding-top: 15px;
 }
 
-.container > div {
+.contactApp > div {
   padding: 25px;
   width: 100%;
 }
 
-.container > h2 {
+.contactApp > h2 {
   box-shadow: 0px 5px 5px 0.1px #0f0f0f;
   width: calc(100% + 6px);
   text-align: center;
@@ -227,4 +236,33 @@ body {
   color: #e23c73;
   cursor: pointer;
   font-size: 17px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .contactApp {
+    width: 100%;
+  }
+
+  body {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .newContact form {
+    padding: 10px;
+  }
+
+  .newContact form .specifications {
+    flex-wrap: wrap;
+  }
+
+  .newContact form .specifications input {
+    width: 100%;
+  }
+
+  .newContact form .specifications input:first-child {
+    margin-bottom: 15px;
+  }
 }

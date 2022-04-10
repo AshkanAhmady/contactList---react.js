@@ -31,7 +31,7 @@ const ContactApp = () => {
   };
 
   return (
-    <div className="container">
+    <div className="contactApp">
       <h2>Contact App</h2>
       <div>
         <AddContact addContactHandler={addContactHandler} />
