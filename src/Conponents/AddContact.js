@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-const NewContact = ({ addContactHandler }) => {
+const AddContact = ({ addContactHandler }) => {
   const [contact, setContact] = useState({ name: "", email: "", gender: "" });
+
+  // use this ref for reset radios
+  const maleRef = useRef();
+  const famaleRef = useRef();
 
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -10,6 +14,11 @@ const NewContact = ({ addContactHandler }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     addContactHandler(contact);
+
+    // reset form
+    setContact({ name: "", email: "", gender: "" });
+    maleRef.current.checked = false;
+    famaleRef.current.checked = false;
   };
 
   return (
@@ -43,6 +52,7 @@ const NewContact = ({ addContactHandler }) => {
             name="gender"
             value="male"
             id="male"
+            ref={maleRef}
           />
           <label htmlFor="female">Female:</label>
           <input
@@ -52,6 +62,7 @@ const NewContact = ({ addContactHandler }) => {
             name="gender"
             value="female"
             id="female"
+            ref={famaleRef}
           />
         </div>
         <button type="submit">Add</button>
@@ -60,4 +71,4 @@ const NewContact = ({ addContactHandler }) => {
   );
 };
 
-export default NewContact;
+export default AddContact;

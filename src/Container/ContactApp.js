@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactsList from "../Conponents/ContactsList";
-import NewContact from "../Conponents/NewContact";
+import AddContact from "../Conponents/AddContact";
 import _ from "lodash";
 import { toast } from "react-toastify";
 
-const ContactListApp = () => {
+const ContactApp = () => {
   const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const storedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (storedContacts) setContacts(storedContacts);
+  }, []);
+
+  // set data in localStorage
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   //   create contact
   const addContactHandler = (contact) => {
@@ -22,13 +32,13 @@ const ContactListApp = () => {
 
   return (
     <div className="container">
-      <h2>Contact List App</h2>
+      <h2>Contact App</h2>
       <div>
-        <NewContact addContactHandler={addContactHandler} />
+        <AddContact addContactHandler={addContactHandler} />
         <ContactsList deleteHandler={deleteHandler} contacts={contacts} />
       </div>
     </div>
   );
 };
 
-export default ContactListApp;
+export default ContactApp;
