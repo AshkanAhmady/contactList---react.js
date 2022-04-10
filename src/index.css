@@ -23,7 +23,7 @@ body {
   padding: 40px;
 }
 
-.contactApp {
+.layout {
   background-color: #121212;
   box-shadow: 0px 5px 5px 0.1px #121212;
   color: #e2e2e2;
@@ -34,18 +34,57 @@ body {
   padding-top: 15px;
 }
 
-.contactApp > div {
+.layout main {
   padding: 25px;
   width: 100%;
 }
 
-.contactApp > h2 {
+.layout header {
   box-shadow: 0px 5px 5px 0.1px #0f0f0f;
   width: calc(100% + 6px);
-  text-align: center;
   padding: 15px;
   margin-bottom: 10px;
   background-color: #1f1f1f;
+  display: flex;
+  justify-content: space-between;
+}
+
+.layout header ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.layout header ul li {
+  margin-left: 20px;
+}
+
+.layout header ul li a {
+  text-decoration: none;
+  color: aqua;
+  position: relative;
+  transition: 0.3s;
+}
+
+.layout header ul li a.activePage {
+  text-shadow: 0 0 10px aqua;
+}
+
+.layout header ul li a.activePage::after {
+  content: "";
+  position: absolute;
+  height: 1.5px;
+  width: 100%;
+  background-color: aqua;
+  bottom: -2px;
+  left: 0;
+}
+
+.layout header ul li a:hover {
+  text-shadow: 0 0 10px aqua;
+}
+
+.layout header h2 {
   user-select: none;
 }
 
@@ -240,7 +279,7 @@ body {
 
 /* responsive */
 @media (max-width: 900px) {
-  .contactApp {
+  .layout {
     width: 100%;
   }
 

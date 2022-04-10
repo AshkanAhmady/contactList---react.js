@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import ContactsList from "../Conponents/ContactsList";
-import AddContact from "../Conponents/AddContact";
 import _ from "lodash";
 import { toast } from "react-toastify";
 
@@ -30,15 +28,7 @@ const ContactApp = () => {
     setContacts(contacts.filter((item) => item.id !== id));
   };
 
-  return (
-    <div className="contactApp">
-      <h2>Contact App</h2>
-      <div>
-        <AddContact addContactHandler={addContactHandler} />
-        <ContactsList deleteHandler={deleteHandler} contacts={contacts} />
-      </div>
-    </div>
-  );
+  return <div className="contactApp">contact app</div>;
 };
 
 export default ContactApp;
