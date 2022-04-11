@@ -1,5 +1,6 @@
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Contact = ({ contact, onDelete }) => {
   return (
@@ -18,7 +19,15 @@ const Contact = ({ contact, onDelete }) => {
         </div>
       </div>
       <div className="options">
-        <FaEllipsisV className="moreIcon" />
+        <Link
+          className="singleContactLink"
+          to={{
+            pathname: `/contact/${contact.id}`,
+            state: { contact: contact },
+          }}
+        >
+          <FaEllipsisV className="moreIcon" />
+        </Link>
         <FaTrashAlt onClick={onDelete} className="icon" />
       </div>
     </div>
