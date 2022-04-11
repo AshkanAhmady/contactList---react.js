@@ -7,10 +7,11 @@ import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
 const ContactListPage = () => {
   const [contacts, setContacts] = useState(null);
+  const [sort, setSort] = useState("desc");
 
   // mounting
   useEffect(() => {
-    sortListHandler("desc");
+    sortListHandler(sort);
   }, []);
 
   // delete content
@@ -20,7 +21,7 @@ const ContactListPage = () => {
       const response = await getRequest();
 
       let sortedContacts = [...response.data];
-      sortedContacts = _.orderBy(sortedContacts, ["id"], ["desc"]);
+      sortedContacts = _.orderBy(sortedContacts, ["id"], [sort]);
       setContacts(sortedContacts);
       toast.success("Contact Deleted 👌");
     } catch (error) {
@@ -29,12 +30,13 @@ const ContactListPage = () => {
   };
 
   // sort list
-  const sortListHandler = (value) => {
+  const sortListHandler = (sort) => {
     getRequest()
       .then((response) => {
         let sortedContacts = [...response.data];
-        sortedContacts = _.orderBy(sortedContacts, ["id"], [value]);
+        sortedContacts = _.orderBy(sortedContacts, ["id"], [sort]);
         setContacts(sortedContacts);
+        setSort(sort);
       })
       .catch((error) => console.log(error));
   };

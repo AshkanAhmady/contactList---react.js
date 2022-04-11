@@ -25,7 +25,7 @@ const AddContact = ({ history }) => {
 
   //   create contact
   const addContactHandler = (contact) => {
-    addRequest(contact)
+    addRequest({ ...contact, id: new Date().getTime() })
       .then(() => {
         toast.success("New Contact Added 👌");
         history.push("/");
