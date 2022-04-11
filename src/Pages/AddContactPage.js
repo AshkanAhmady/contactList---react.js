@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { addRequest } from "../Services/HttpRequestMethods";
 
-const AddContact = ({ addContactHandler }) => {
+const AddContact = ({ history }) => {
   const [contact, setContact] = useState({ name: "", email: "", gender: "" });
 
   // use this ref for reset radios
@@ -19,6 +21,16 @@ const AddContact = ({ addContactHandler }) => {
     setContact({ name: "", email: "", gender: "" });
     maleRef.current.checked = false;
     famaleRef.current.checked = false;
+  };
+
+  //   create contact
+  const addContactHandler = (contact) => {
+    addRequest(contact)
+      .then(() => {
+        toast.success("New Contact Added 👌");
+        history.push("/");
+      })
+      .catch((error) => toast.error(error));
   };
 
   return (

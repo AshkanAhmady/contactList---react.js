@@ -56,7 +56,7 @@ body {
 }
 
 .layout header ul li {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .layout header ul li a {
@@ -66,26 +66,25 @@ body {
   transition: 0.3s;
 }
 
+.layout header ul li a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .layout header ul li a.activePage {
-  text-shadow: 0 0 10px aqua;
-}
-
-.layout header ul li a.activePage::after {
-  content: "";
-  position: absolute;
-  height: 1.5px;
-  width: 100%;
-  background-color: aqua;
-  bottom: -2px;
-  left: 0;
-}
-
-.layout header ul li a:hover {
-  text-shadow: 0 0 10px aqua;
+  background-color: #121212;
 }
 
 .layout header h2 {
   user-select: none;
+}
+
+.layout header .icon {
+  font-size: 19px;
 }
 
 .newContact {
@@ -206,10 +205,6 @@ body {
   transform: scale(1);
 }
 
-.contactsList {
-  margin-top: 50px;
-}
-
 .contactsList > section {
   margin-top: 10px;
   background-color: #1f1f1f;
@@ -225,6 +220,20 @@ body {
 .contactsList > section p.emptyList {
   user-select: none;
   color: #e23c73;
+}
+
+.contactsList .listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contactsList .listHeader .icon {
+  background-color: #1f1f1f;
+  margin-left: 10px;
+  font-size: 27px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .single_contact {
@@ -275,6 +284,50 @@ body {
   color: #e23c73;
   cursor: pointer;
   font-size: 17px;
+}
+
+.single_contact .options .moreIcon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.single_contact .options a.singleContactLink {
+  color: #e2e2e2;
+}
+
+.not_found {
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.not_found h1 {
+  color: #e23c73;
+  font-weight: lighter;
+  font-size: 70px;
+  user-select: none;
+}
+
+.not_found h3 {
+  margin: 0 0 20px 0;
+  user-select: none;
+}
+
+.not_found a {
+  text-decoration: none;
+  color: #fff;
+  background-color: blueviolet;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.not_found a:hover {
+  box-shadow: 0px 5px 5px 0.1px #121212;
+  transform: scale(1.05);
 }
 
 /* responsive */

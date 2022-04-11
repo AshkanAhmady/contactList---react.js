@@ -14,8 +14,6 @@ function App() {
             return <Route key={index} {...route} />;
           })}
         </Switch>
-        {/* <AddContact addContactHandler={addContactHandler} />
-          <ContactsList deleteHandler={deleteHandler} contacts={contacts} /> */}
       </Layout>
     </>
   );

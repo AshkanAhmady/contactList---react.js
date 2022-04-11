@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { FcPlus } from "react-icons/fc";
+import { FcViewDetails } from "react-icons/fc";
 
 const Header = () => {
   return (
@@ -7,12 +9,12 @@ const Header = () => {
       <ul>
         <li>
           <NavLink exact={true} activeClassName="activePage" to="/">
-            Home
+            <FcViewDetails className="icon" />
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="activePage" to="/add-contact">
-            Add Contact
+            <FcPlus className="icon" />
           </NavLink>
         </li>
       </ul>

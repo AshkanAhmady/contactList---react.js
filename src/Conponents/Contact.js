@@ -1,5 +1,5 @@
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 
 const Contact = ({ contact, onDelete }) => {
   return (
@@ -18,6 +18,7 @@ const Contact = ({ contact, onDelete }) => {
         </div>
       </div>
       <div className="options">
+        <FaEllipsisV className="moreIcon" />
         <FaTrashAlt onClick={onDelete} className="icon" />
       </div>
     </div>

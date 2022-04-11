@@ -1,4 +1,3 @@
-import Footer from "../Conponents/Footer";
 import Header from "../Conponents/Header";
 
 const Layout = ({ children }) => {
@@ -6,7 +5,6 @@ const Layout = ({ children }) => {
     <div className="layout">
       <Header />
       <main>{children}</main>
-      <Footer />
     </div>
   );
 };
