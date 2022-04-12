@@ -57,7 +57,14 @@ const ContactListPage = () => {
       setFilterContact(contacts);
     } else {
       let filteredList = contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(e.target.value.toLowerCase())
+        // get all values in one contact
+        // and search in all values in one contact
+        //  Object.values ==> all values of object
+        // join(" ") ==> join this values and turn to string
+        Object.values(contact)
+          .join(" ")
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
       );
 
       setFilterContact(filteredList);
