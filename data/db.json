@@ -4,16 +4,16 @@
       "name": "ashkan",
       "email": "ashkan@gmail.com",
       "gender": "male",
-      "phone": "09184174117",
+      "phone": 0,
       "emailPhoneShow": "email",
       "id": 1
     },
     {
-      "name": "خجیجه",
-      "email": "khaje@gmail.com",
-      "gender": "female",
-      "phone": "09188888888",
-      "emailPhoneShow": "phone",
+      "name": "ali",
+      "email": "ali@gmail.com",
+      "gender": "male",
+      "phone": 0,
+      "emailPhoneShow": "email",
       "id": 2
     }
   ]

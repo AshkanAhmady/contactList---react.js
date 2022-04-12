@@ -165,12 +165,6 @@ input[type="number"] {
   border: 1px solid #000;
 }
 
-.newContact form .specifications input::placeholder,
-.updateContact form .specifications input::placeholder {
-  color: #9e9e9e;
-  font-weight: lighter;
-}
-
 .newContact form button,
 .updateContact form button {
   background-color: #663399;
@@ -284,6 +278,29 @@ input[type="number"] {
   font-size: 27px;
   padding: 5px;
   cursor: pointer;
+  border-radius: 3px;
+}
+
+.contactsList .contactList_options {
+  display: flex;
+  align-items: center;
+}
+
+.contactsList .contactList_options input {
+  box-shadow: 0px 5px 5px 0.1px #0f0f0f;
+  border: none;
+  background-color: #1f1f1f;
+  border: 1px solid #1f1f1f;
+  padding: 4px 10px;
+  color: #e2e2e2;
+  outline: none;
+  font-weight: 400;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.contactsList .contactList_options input:focus {
+  border: 1px solid #000;
 }
 
 .single_contact {
@@ -341,6 +358,8 @@ input[type="number"] {
 .single_contact .options .moreIcon {
   cursor: pointer;
   margin-right: 10px;
+  margin-bottom: -2px;
+  height: 100%;
 }
 
 .single_contact .options a.edit {
