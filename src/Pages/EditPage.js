@@ -1,12 +1,13 @@
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import {
-  getSingleRequest,
-  updateRequest,
-} from "../Services/HttpRequestMethods";
+import { useContact, useContactActions } from "../Provider/ContactProvider";
+// import {
+//   getSingleRequest,
+//   updateRequest,
+// } from "../Services/HttpRequestMethods";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 
-const SingleContactPage = (props) => {
+const EditPage = (props) => {
   const [edit, setEdit] = useState({
     name: "",
     email: "",
@@ -15,18 +16,15 @@ const SingleContactPage = (props) => {
     emailPhoneShow: "email",
   });
 
+  const contacts = useContact();
+  const dispatch = useContactActions();
+
   // get current contact
   useEffect(() => {
-    const fetchContact = async () => {
-      try {
-        const { data } = await getSingleRequest(props.match.params.id);
-        setEdit(data);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-
-    fetchContact();
+    let currentContact = contacts.find(
+      (item) => item.id == props.match.params.id
+    );
+    setEdit(currentContact);
   }, []);
 
   const changeHandler = (e) => {
@@ -35,12 +33,17 @@ const SingleContactPage = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    // valid PhoneNumber
     if (edit.phone.length !== 11) {
       toast.error("you should enter valid phone number");
       return;
     }
 
-    updateContactHandler(edit);
+    // send data to core
+    dispatch({ type: "update", id: props.match.params.id, contact: edit });
+
+    // clear edit state
     setEdit({
       name: "",
       email: "",
@@ -48,16 +51,10 @@ const SingleContactPage = (props) => {
       phone: 0,
       emailPhoneShow: "email",
     });
-  };
 
-  // update contact
-  const updateContactHandler = (edit) => {
-    updateRequest(props.match.params.id, edit)
-      .then(() => {
-        toast.success("Contact Was Updated 👌");
-        props.history.push("/");
-      })
-      .catch((error) => toast.error(error.message));
+    // redirection
+    toast.success("Contact Was Updated 👌");
+    props.history.push("/");
   };
 
   return (
@@ -158,4 +155,4 @@ const SingleContactPage = (props) => {
   );
 };
 
-export default SingleContactPage;
+export default EditPage;

@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { addRequest } from "../Services/HttpRequestMethods";
+import { useContactActions } from "../Provider/ContactProvider";
+// import { addRequest } from "../Services/HttpRequestMethods";
 
 const AddContact = ({ history }) => {
   const [contact, setContact] = useState({
@@ -11,26 +12,26 @@ const AddContact = ({ history }) => {
     emailPhoneShow: "email",
   });
 
+  const dispatch = useContactActions();
+
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
+  // create contact
   const submitHandler = (e) => {
     e.preventDefault();
-    addContactHandler(contact);
-
+    dispatch({ type: "add", value: contact });
+    toast.success("New Contact Added 👌");
     // reset form
-    setContact({ name: "", email: "", gender: "" });
-  };
-
-  //   create contact
-  const addContactHandler = (contact) => {
-    addRequest(contact)
-      .then(() => {
-        toast.success("New Contact Added 👌");
-        history.push("/");
-      })
-      .catch((error) => toast.error(error.message));
+    setContact({
+      name: "",
+      email: "",
+      gender: "",
+      phone: 0,
+      emailPhoneShow: "email",
+    });
+    history.push("/");
   };
 
   return (

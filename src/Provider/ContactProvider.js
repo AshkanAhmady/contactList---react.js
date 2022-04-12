@@ -1,0 +1,68 @@
+import _ from "lodash";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useState,
+  useEffect,
+} from "react";
+
+const ContactContext = createContext();
+const ContactContextDispatcher = createContext();
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "add": {
+      let cloneContacts = [...state];
+      cloneContacts = [...cloneContacts, { ...action.value, id: Date.now() }];
+      return cloneContacts;
+    }
+
+    case "sort": {
+      let cloneContacts = [...state];
+      if (action.value === "asc") {
+        return _.orderBy(cloneContacts, ["id"], ["asc"]);
+      } else {
+        return _.orderBy(cloneContacts, ["id"], ["desc"]);
+      }
+    }
+
+    case "delete": {
+      let updatedContact = state.filter((item) => item.id !== action.id);
+      return _.orderBy(updatedContact, ["id"], [action.sort]);
+    }
+
+    case "update": {
+      const index = state.findIndex((item) => item.id == action.id);
+      let cloneContacts = [...state];
+      let currentContact = { ...cloneContacts[index] };
+      currentContact = action.contact;
+      cloneContacts[index] = currentContact;
+
+      return cloneContacts;
+    }
+
+    default:
+      return state;
+  }
+};
+
+const ContactProvider = ({ children }) => {
+  const [contacts, dispatch] = useReducer(reducer, []);
+
+  useEffect(() => {
+    // console.log(contacts);
+  }, [contacts]);
+
+  return (
+    <ContactContext.Provider value={contacts}>
+      <ContactContextDispatcher.Provider value={dispatch}>
+        {children}
+      </ContactContextDispatcher.Provider>
+    </ContactContext.Provider>
+  );
+};
+
+export default ContactProvider;
+export const useContact = () => useContext(ContactContext);
+export const useContactActions = () => useContext(ContactContextDispatcher);

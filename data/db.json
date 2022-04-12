@@ -1,20 +1,5 @@
 {
   "contacts": [
-    {
-      "name": "ashkan",
-      "email": "ashkan@gmail.com",
-      "gender": "male",
-      "phone": "09184174117",
-      "emailPhoneShow": "phone",
-      "id": 1
-    },
-    {
-      "name": "خجیجه",
-      "email": "khaje@gmail.com",
-      "gender": "female",
-      "phone": 0,
-      "emailPhoneShow": "email",
-      "id": 2
-    }
+
   ]
 }

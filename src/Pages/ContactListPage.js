@@ -3,13 +3,14 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import Contact from "../Conponents/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
-import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
+import { useContact, useContactActions } from "../Provider/ContactProvider";
+// import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
 let sort = "desc";
 
 const ContactListPage = () => {
-  const [contacts, setContacts] = useState(null);
-  // const [sort, setSort] = useState("desc");
+  const contacts = useContact();
+  const dispatch = useContactActions();
   const [filterContact, setFilterContact] = useState([]);
 
   // mounting
@@ -23,36 +24,19 @@ const ContactListPage = () => {
   }, [contacts]);
 
   // delete content
-  const deleteHandler = async (id) => {
-    try {
-      await deleteRequest(id);
-      const response = await getRequest();
-
-      let sortedContacts = [...response.data];
-      sortedContacts = _.orderBy(sortedContacts, ["id"], [sort]);
-      setContacts(sortedContacts);
-      toast.success("Contact Deleted 👌");
-    } catch (error) {
-      toast.error(error.message);
-    }
+  const deleteHandler = (id) => {
+    dispatch({ type: "delete", id: id, sort: sort });
+    toast.success("Contact Deleted 👌");
   };
 
   // sort list
   const sortListHandler = (sortValue) => {
-    getRequest()
-      .then((response) => {
-        let sortedContacts = [...response.data];
-        sortedContacts = _.orderBy(sortedContacts, ["id"], [sortValue]);
-        setContacts(sortedContacts);
-        sort = sortValue;
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    dispatch({ type: "sort", value: sortValue });
+    sort = sortValue;
   };
 
   // search method
-  const filterHandler = (e) => {
+  const searchHandler = (e) => {
     if (e.target.value == "") {
       setFilterContact(contacts);
     } else {
@@ -111,7 +95,7 @@ const ContactListPage = () => {
         {contacts && contacts.length > 0 && (
           <div className="contactList_options">
             <input
-              onChange={filterHandler}
+              onChange={searchHandler}
               placeholder="Search..."
               type="text"
             />
