@@ -1,6 +1,8 @@
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const Contact = ({ contact, onDelete }) => {
   return (
@@ -15,18 +17,27 @@ const Contact = ({ contact, onDelete }) => {
         </div>
         <div className="name_email">
           <h3>{contact.name}</h3>
-          <span>{contact.email}</span>
+          {contact.emailPhoneShow == "email" ? (
+            <span>{contact.email}</span>
+          ) : (
+            <span>{contact.phone}</span>
+          )}
         </div>
       </div>
       <div className="options">
         <Link
-          className="singleContactLink"
+          className="edit"
+          // static => send data to another Route
           to={{
-            pathname: `/contact/${contact.id}`,
+            pathname: `/edit/${contact.id}`,
             state: { contact: contact },
           }}
         >
-          <FaEllipsisV className="moreIcon" />
+          <Tippy content="Edit Contact">
+            <div>
+              <FaEllipsisV className="moreIcon" />
+            </div>
+          </Tippy>
         </Link>
         <FaTrashAlt onClick={onDelete} className="icon" />
       </div>

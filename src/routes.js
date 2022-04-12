@@ -1,10 +1,10 @@
 import AddContactPage from "./Pages/AddContactPage";
 import ContactListPage from "./Pages/ContactListPage";
 import NotFound from "./Pages/NotFound";
-import SingleContactPage from "./Pages/SingleContactPage";
+import EditPage from "./Pages/EditPage";
 
 const routes = [
-  { path: "/contact/:id", component: SingleContactPage },
+  { path: "/edit/:id", component: EditPage },
   { path: "/add-contact", component: AddContactPage },
   { path: "/", component: ContactListPage, exact: true },
   { component: NotFound },

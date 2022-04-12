@@ -3,11 +3,13 @@ import { toast } from "react-toastify";
 import { addRequest } from "../Services/HttpRequestMethods";
 
 const AddContact = ({ history }) => {
-  const [contact, setContact] = useState({ name: "", email: "", gender: "" });
-
-  // use this ref for reset radios
-  const maleRef = useRef();
-  const famaleRef = useRef();
+  const [contact, setContact] = useState({
+    name: "",
+    email: "",
+    gender: "",
+    phone: 0,
+    emailPhoneShow: "email",
+  });
 
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -19,18 +21,16 @@ const AddContact = ({ history }) => {
 
     // reset form
     setContact({ name: "", email: "", gender: "" });
-    maleRef.current.checked = false;
-    famaleRef.current.checked = false;
   };
 
   //   create contact
   const addContactHandler = (contact) => {
-    addRequest({ ...contact, id: new Date().getTime() })
+    addRequest(contact)
       .then(() => {
         toast.success("New Contact Added 👌");
         history.push("/");
       })
-      .catch((error) => toast.error(error));
+      .catch((error) => toast.error(error.message));
   };
 
   return (
@@ -64,7 +64,6 @@ const AddContact = ({ history }) => {
             name="gender"
             value="male"
             id="male"
-            ref={maleRef}
           />
           <label htmlFor="female">Female:</label>
           <input
@@ -74,7 +73,6 @@ const AddContact = ({ history }) => {
             name="gender"
             value="female"
             id="female"
-            ref={famaleRef}
           />
         </div>
         <button type="submit">Add</button>

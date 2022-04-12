@@ -25,7 +25,7 @@ const ContactListPage = () => {
       setContacts(sortedContacts);
       toast.success("Contact Deleted 👌");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -38,7 +38,9 @@ const ContactListPage = () => {
         setContacts(sortedContacts);
         setSort(sort);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   // render elements
