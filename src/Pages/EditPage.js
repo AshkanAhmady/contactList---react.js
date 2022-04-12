@@ -98,49 +98,59 @@ const SingleContactPage = (props) => {
             onChange={changeHandler}
           />
         </div>
-        <div className="gender">
-          <label htmlFor="male">Male:</label>
-          <input
-            required
-            onChange={changeHandler}
-            type="radio"
-            name="gender"
-            checked={edit.gender === "male"}
-            value="male"
-            id="male"
-          />
-          <label htmlFor="female">Female:</label>
-          <input
-            required
-            onChange={changeHandler}
-            type="radio"
-            name="gender"
-            checked={edit.gender === "female"}
-            value="female"
-            id="female"
-          />
-        </div>
-        <div className="email_phone_show">
-          <label htmlFor="email">Show Email:</label>
-          <input
-            required
-            onChange={changeHandler}
-            type="radio"
-            name="emailPhoneShow"
-            checked={edit.emailPhoneShow == "email"}
-            value="email"
-            id="email"
-          />
-          <label htmlFor="phone">Show Number:</label>
-          <input
-            required
-            onChange={changeHandler}
-            type="radio"
-            name="emailPhoneShow"
-            checked={edit.emailPhoneShow == "phone"}
-            value="phone"
-            id="phone"
-          />
+        <div className="radios">
+          <div className="gender">
+            <div>
+              <label htmlFor="male">Male:</label>
+              <input
+                required
+                onChange={changeHandler}
+                type="radio"
+                name="gender"
+                checked={edit.gender === "male"}
+                value="male"
+                id="male"
+              />
+            </div>
+            <div>
+              <label htmlFor="female">Female:</label>
+              <input
+                required
+                onChange={changeHandler}
+                type="radio"
+                name="gender"
+                checked={edit.gender === "female"}
+                value="female"
+                id="female"
+              />
+            </div>
+          </div>
+          <div className="email_phone_show">
+            <div>
+              <label htmlFor="email">Show Email:</label>
+              <input
+                required
+                onChange={changeHandler}
+                type="radio"
+                name="emailPhoneShow"
+                checked={edit.emailPhoneShow == "email"}
+                value="email"
+                id="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Show Number:</label>
+              <input
+                required
+                onChange={changeHandler}
+                type="radio"
+                name="emailPhoneShow"
+                checked={edit.emailPhoneShow == "phone"}
+                value="phone"
+                id="phone"
+              />
+            </div>
+          </div>
         </div>
         <button type="submit">Update</button>
       </form>

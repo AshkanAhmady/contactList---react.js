@@ -5,9 +5,11 @@ import Contact from "../Conponents/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
 import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
+let sort = "desc";
+
 const ContactListPage = () => {
   const [contacts, setContacts] = useState(null);
-  const [sort, setSort] = useState("desc");
+  // const [sort, setSort] = useState("desc");
   const [filterContact, setFilterContact] = useState([]);
 
   // mounting
@@ -36,13 +38,13 @@ const ContactListPage = () => {
   };
 
   // sort list
-  const sortListHandler = (sort) => {
+  const sortListHandler = (sortValue) => {
     getRequest()
       .then((response) => {
         let sortedContacts = [...response.data];
-        sortedContacts = _.orderBy(sortedContacts, ["id"], [sort]);
+        sortedContacts = _.orderBy(sortedContacts, ["id"], [sortValue]);
         setContacts(sortedContacts);
-        setSort(sort);
+        sort = sortValue;
       })
       .catch((error) => {
         toast.error(error.message);
@@ -107,7 +109,7 @@ const ContactListPage = () => {
               type="text"
             />
             {contacts.length > 1 && (
-              <>
+              <div>
                 <FcGenericSortingAsc
                   onClick={() => sortListHandler("asc")}
                   className="icon"
@@ -116,7 +118,7 @@ const ContactListPage = () => {
                   onClick={() => sortListHandler("desc")}
                   className="icon"
                 />
-              </>
+              </div>
             )}
           </div>
         )}

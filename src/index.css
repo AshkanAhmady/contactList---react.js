@@ -146,7 +146,11 @@ body {
 
 .updateContact form .specifications input {
   width: 100%;
-  margin: 5px 0;
+  margin-bottom: 15px;
+}
+
+.updateContact form .specifications input:last-child {
+  margin: 0;
 }
 
 input::-webkit-outer-spin-button,
@@ -195,6 +199,11 @@ input[type="number"] {
   align-items: center;
   height: 30px;
   margin-top: 10px;
+}
+
+.updateContact .gender > div,
+.updateContact .email_phone_show > div {
+  display: flex;
 }
 
 .newContact form .gender label,
@@ -282,6 +291,11 @@ input[type="number"] {
 }
 
 .contactsList .contactList_options {
+  display: flex;
+  align-items: center;
+}
+
+.contactsList .contactList_options > div {
   display: flex;
   align-items: center;
 }
@@ -427,6 +441,65 @@ input[type="number"] {
 
   .newContact form .specifications input:first-child {
     margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 470px) {
+  .contactsList .listHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contactsList .listHeader .contactList_options {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .newContact form .specifications,
+  .updateContact form .specifications {
+    margin: 0;
+  }
+
+  .newContact form,
+  .updateContact form {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .newContact form .specifications input,
+  .updateContact form .specifications input {
+    padding: 10px;
+  }
+
+  .newContact form button,
+  .updateContact form button {
+    font-size: 14px;
+    padding: 5px 25px;
+  }
+}
+
+@media (max-width: 360px) {
+  .contactsList .listHeader .contactList_options input {
+    width: 80%;
+  }
+
+  .updateContact .gender,
+  .updateContact .email_phone_show {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: unset;
+  }
+
+  .updateContact .gender input,
+  .updateContact .email_phone_show input {
+    margin-top: 3px !important;
+  }
+
+  .updateContact .email_phone_show {
+    margin: 25px 0 10px 0;
   }
 }
 
