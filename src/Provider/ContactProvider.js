@@ -53,6 +53,8 @@ const reducer = (state, action) => {
 
 const ContactProvider = ({ children }) => {
   const [contacts, dispatch] = useReducer(reducer, []);
+  console.log("(ContactProvider)", "contacts=>", contacts);
+  console.log("(ContactProvider)", "dispatch=>", dispatch);
 
   useEffect(() => {
     // localStorage.clear();
