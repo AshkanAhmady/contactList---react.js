@@ -38,8 +38,12 @@ const reducer = (state, action) => {
       let currentContact = { ...cloneContacts[index] };
       currentContact = action.contact;
       cloneContacts[index] = currentContact;
-
       return cloneContacts;
+    }
+
+    case "getDB": {
+      let savedData = action.value;
+      return savedData;
     }
 
     default:
@@ -51,7 +55,14 @@ const ContactProvider = ({ children }) => {
   const [contacts, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
-    // console.log(contacts);
+    // localStorage.clear();
+    var storedData = JSON.parse(localStorage.getItem("DB"));
+    // set Contacts
+    dispatch({ type: "getDB", value: storedData });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("DB", JSON.stringify(contacts));
   }, [contacts]);
 
   return (

@@ -14,9 +14,9 @@ const ContactListPage = () => {
   const [filterContact, setFilterContact] = useState([]);
 
   // mounting
-  useEffect(() => {
-    sortListHandler(sort);
-  }, []);
+  // useEffect(() => {
+  //   sortListHandler(sort);
+  // }, []);
 
   // updating contacts
   useEffect(() => {
