@@ -9,26 +9,31 @@ import {
 
 const ContactContext = createContext();
 const ContactContextDispatcher = createContext();
+let DB = [];
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "add": {
       let cloneContacts = [...state];
       cloneContacts = [...cloneContacts, { ...action.value, id: Date.now() }];
+      DB = [...DB, { ...action.value, id: Date.now() }];
       return cloneContacts;
     }
 
     case "sort": {
       let cloneContacts = [...state];
       if (action.value === "asc") {
+        DB = _.orderBy(DB, ["id"], ["asc"]);
         return _.orderBy(cloneContacts, ["id"], ["asc"]);
       } else {
+        DB = _.orderBy(DB, ["id"], ["desc"]);
         return _.orderBy(cloneContacts, ["id"], ["desc"]);
       }
     }
 
     case "delete": {
       let updatedContact = state.filter((item) => item.id !== action.id);
+      DB = _.orderBy(updatedContact, ["id"], [action.sort]);
       return _.orderBy(updatedContact, ["id"], [action.sort]);
     }
 
@@ -38,12 +43,8 @@ const reducer = (state, action) => {
       let currentContact = { ...cloneContacts[index] };
       currentContact = action.contact;
       cloneContacts[index] = currentContact;
+      DB = cloneContacts;
       return cloneContacts;
-    }
-
-    case "getDB": {
-      let savedData = action.value;
-      return savedData;
     }
 
     default:
@@ -53,18 +54,6 @@ const reducer = (state, action) => {
 
 const ContactProvider = ({ children }) => {
   const [contacts, dispatch] = useReducer(reducer, []);
-  console.log("hi");
-
-  // useEffect(() => {
-  //   // localStorage.clear();
-  //   var storedData = JSON.parse(localStorage.getItem("DB"));
-  //   // set Contacts
-  //   dispatch({ type: "getDB", value: storedData });
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("DB", JSON.stringify(contacts));
-  // }, [contacts]);
 
   return (
     <ContactContext.Provider value={contacts}>
