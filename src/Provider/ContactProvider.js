@@ -53,19 +53,18 @@ const reducer = (state, action) => {
 
 const ContactProvider = ({ children }) => {
   const [contacts, dispatch] = useReducer(reducer, []);
-  console.log("(ContactProvider)", "contacts=>", contacts);
-  console.log("(ContactProvider)", "dispatch=>", dispatch);
+  console.log("hi");
 
-  useEffect(() => {
-    // localStorage.clear();
-    var storedData = JSON.parse(localStorage.getItem("DB"));
-    // set Contacts
-    dispatch({ type: "getDB", value: storedData });
-  }, []);
+  // useEffect(() => {
+  //   // localStorage.clear();
+  //   var storedData = JSON.parse(localStorage.getItem("DB"));
+  //   // set Contacts
+  //   dispatch({ type: "getDB", value: storedData });
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("DB", JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem("DB", JSON.stringify(contacts));
+  // }, [contacts]);
 
   return (
     <ContactContext.Provider value={contacts}>

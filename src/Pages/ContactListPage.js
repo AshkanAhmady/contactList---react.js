@@ -13,9 +13,6 @@ const ContactListPage = () => {
   const dispatch = useContactActions();
   const [filterContact, setFilterContact] = useState([]);
 
-  console.log("(ContactListPage)", "contacts=>", contacts);
-  console.log("(ContactListPage)", "dispatch=>", dispatch);
-
   // mounting
   // useEffect(() => {
   //   sortListHandler(sort);

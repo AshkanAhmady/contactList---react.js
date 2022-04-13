@@ -14,8 +14,6 @@ const AddContact = ({ history }) => {
 
   const dispatch = useContactActions();
 
-  console.log("(AddContact)", "dispatch=>", dispatch);
-
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
