@@ -3,15 +3,18 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import Contact from "../Conponents/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
-import { useContact, useContactActions } from "../Provider/ContactProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact, sortContact } from "../redux/contact/contactActions";
 // import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
 let sort = "desc";
 
 const ContactListPage = () => {
-  const contacts = useContact();
-  const dispatch = useContactActions();
+  const contacts = useSelector((state) => state);
+  console.log(contacts);
   const [filterContact, setFilterContact] = useState([]);
+
+  const dispatch = useDispatch();
 
   // mounting
   // useEffect(() => {
@@ -25,13 +28,13 @@ const ContactListPage = () => {
 
   // delete content
   const deleteHandler = (id) => {
-    dispatch({ type: "delete", id: id, sort: sort });
+    dispatch(deleteContact(id, sort));
     toast.success("Contact Deleted 👌");
   };
 
   // sort list
   const sortListHandler = (sortValue) => {
-    dispatch({ type: "sort", value: sortValue });
+    dispatch(sortContact(sortValue));
     sort = sortValue;
   };
 

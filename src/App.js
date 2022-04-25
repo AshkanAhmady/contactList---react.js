@@ -3,7 +3,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import Layout from "./layout/Layout";
-import ContactProvider from "./Provider/ContactProvider";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
@@ -11,13 +12,13 @@ function App() {
       <ToastContainer theme="dark" />
 
       <Layout>
-        <ContactProvider>
+        <Provider store={store}>
           <Switch>
             {routes.map((route, index) => {
               return <Route key={index} {...route} />;
             })}
           </Switch>
-        </ContactProvider>
+        </Provider>
       </Layout>
     </>
   );

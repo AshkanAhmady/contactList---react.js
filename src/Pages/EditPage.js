@@ -1,11 +1,12 @@
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import { useContact, useContactActions } from "../Provider/ContactProvider";
 // import {
 //   getSingleRequest,
 //   updateRequest,
 // } from "../Services/HttpRequestMethods";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
+import { useDispatch, useSelector } from "react-redux";
+import { updateContact } from "../redux/contact/contactActions";
 
 const EditPage = (props) => {
   const [edit, setEdit] = useState({
@@ -16,8 +17,8 @@ const EditPage = (props) => {
     emailPhoneShow: "email",
   });
 
-  const contacts = useContact();
-  const dispatch = useContactActions();
+  const contacts = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   // get current contact
   useEffect(() => {
@@ -41,7 +42,7 @@ const EditPage = (props) => {
     }
 
     // send data to core
-    dispatch({ type: "update", id: props.match.params.id, contact: edit });
+    dispatch(updateContact(props.match.params.id, edit));
 
     // clear edit state
     setEdit({
@@ -60,7 +61,7 @@ const EditPage = (props) => {
   return (
     <div className="updateContact">
       <span className="update_text">
-        Upade (
+        Update (
         {edit.gender == "male" ? (
           <FcBusinessman className="icon" />
         ) : (
