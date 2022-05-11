@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { updateContact } from "../redux/contact/contactActions";
+import { useNavigate, useParams } from "react-router-dom";
 
-const EditPage = (props) => {
+const EditPage = () => {
   const [edit, setEdit] = useState({
     name: "",
     email: "",
@@ -17,14 +18,15 @@ const EditPage = (props) => {
     emailPhoneShow: "email",
   });
 
+  const selectedContact = useParams();
+  let navigate = useNavigate();
+
   const contacts = useSelector((state) => state);
   const dispatch = useDispatch();
 
   // get current contact
   useEffect(() => {
-    let currentContact = contacts.find(
-      (item) => item.id == props.match.params.id
-    );
+    let currentContact = contacts.find((item) => item.id == selectedContact.id);
     setEdit(currentContact);
   }, []);
 
@@ -42,7 +44,7 @@ const EditPage = (props) => {
     }
 
     // send data to core
-    dispatch(updateContact(props.match.params.id, edit));
+    dispatch(updateContact(selectedContact.id, edit));
 
     // clear edit state
     setEdit({
@@ -55,7 +57,7 @@ const EditPage = (props) => {
 
     // redirection
     toast.success("Contact Was Updated 👌");
-    props.history.push("/");
+    navigate("/");
   };
 
   return (

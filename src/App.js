@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import routes from "./routes";
 import Layout from "./layout/Layout";
 import { Provider } from "react-redux";
@@ -13,11 +13,11 @@ function App() {
 
       <Layout>
         <Provider store={store}>
-          <Switch>
+          <Routes>
             {routes.map((route, index) => {
               return <Route key={index} {...route} />;
             })}
-          </Switch>
+          </Routes>
         </Provider>
       </Layout>
     </>

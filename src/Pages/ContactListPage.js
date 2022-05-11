@@ -11,7 +11,6 @@ let sort = "desc";
 
 const ContactListPage = () => {
   const contacts = useSelector((state) => state);
-  console.log(contacts);
   const [filterContact, setFilterContact] = useState([]);
 
   const dispatch = useDispatch();

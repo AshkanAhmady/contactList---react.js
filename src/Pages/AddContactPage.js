@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addContact } from "../redux/contact/contactActions";
 // import { addRequest } from "../Services/HttpRequestMethods";
 
-const AddContact = ({ history }) => {
+const AddContact = () => {
   const [contact, setContact] = useState({
     name: "",
     email: "",
@@ -12,6 +13,10 @@ const AddContact = ({ history }) => {
     phone: 0,
     emailPhoneShow: "email",
   });
+
+  let navigate = useNavigate();
+  let location = useSearchParams();
+  console.log(location);
 
   const dispatch = useDispatch();
 
@@ -32,7 +37,7 @@ const AddContact = ({ history }) => {
       phone: 0,
       emailPhoneShow: "email",
     });
-    history.push("/");
+    navigate("/");
   };
 
   return (

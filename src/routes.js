@@ -4,10 +4,10 @@ import NotFound from "./Pages/NotFound";
 import EditPage from "./Pages/EditPage";
 
 const routes = [
-  { path: "/edit/:id", component: EditPage },
-  { path: "/add-contact", component: AddContactPage },
-  { path: "/", component: ContactListPage, exact: true },
-  { component: NotFound },
+  { path: "/edit/:id", element: <EditPage /> },
+  { path: "/add-contact", element: <AddContactPage /> },
+  { path: "/", element: <ContactListPage /> },
+  { component: <NotFound /> },
 ];
 
 export default routes;

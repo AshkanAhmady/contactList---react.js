@@ -8,12 +8,18 @@ const Header = () => {
       <h2>Contact App</h2>
       <ul>
         <li>
-          <NavLink exact={true} activeClassName="activePage" to="/">
+          <NavLink
+            className={(navData) => (navData.isActive ? "activePage" : "")}
+            to="/"
+          >
             <FcViewDetails className="icon" />
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="activePage" to="/add-contact">
+          <NavLink
+            className={(navData) => (navData.isActive ? "activePage" : "")}
+            to="/add-contact"
+          >
             <FcPlus className="icon" />
           </NavLink>
         </li>
