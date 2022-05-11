@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addContact } from "../redux/contact/contactActions";
 // import { addRequest } from "../Services/HttpRequestMethods";
@@ -15,8 +15,6 @@ const AddContact = () => {
   });
 
   let navigate = useNavigate();
-  let location = useSearchParams();
-  console.log(location);
 
   const dispatch = useDispatch();
 
