@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import routes from "./routes";
 import Layout from "./layout/Layout";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { store } from "./features/store";
 
 function App() {
   return (

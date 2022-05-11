@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 import Contact from "../Conponents/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContact, sortContact } from "../redux/contact/contactActions";
+import { deleteContact, sortContact } from "../features/contact/contactSlice";
 // import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
 let sort = "desc";
 
 const ContactListPage = () => {
-  const contacts = useSelector((state) => state);
+  const { contacts } = useSelector((state) => state.contacts);
   const [filterContact, setFilterContact] = useState([]);
 
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const ContactListPage = () => {
 
   // delete content
   const deleteHandler = (id) => {
-    dispatch(deleteContact(id, sort));
+    dispatch(deleteContact({ id, sort }));
     toast.success("Contact Deleted 👌");
   };
 

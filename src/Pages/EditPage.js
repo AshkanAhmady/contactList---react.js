@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 // } from "../Services/HttpRequestMethods";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateContact } from "../redux/contact/contactActions";
+import { updateContact } from "../features/contact/contactSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditPage = () => {
@@ -21,7 +21,7 @@ const EditPage = () => {
   const selectedContact = useParams();
   let navigate = useNavigate();
 
-  const contacts = useSelector((state) => state);
+  const { contacts } = useSelector((state) => state.contacts);
   const dispatch = useDispatch();
 
   // get current contact
@@ -44,7 +44,8 @@ const EditPage = () => {
     }
 
     // send data to core
-    dispatch(updateContact(selectedContact.id, edit));
+    let id = selectedContact.id;
+    dispatch(updateContact({ id, edit }));
 
     // clear edit state
     setEdit({
