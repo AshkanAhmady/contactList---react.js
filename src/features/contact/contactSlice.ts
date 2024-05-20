@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from "lodash";
+import { ContactType } from "../../types";
 
-const initialState = {
+type InitialStateType = {
+  contacts: ContactType[]
+}
+
+const initialState: InitialStateType = {
   contacts: [],
 };
 
@@ -27,7 +32,7 @@ export const contactSlice = createSlice({
     },
     updateContact: (state, action) => {
       const index = state.contacts.findIndex(
-        (item) => item.id == action.payload.id
+        (item) => item.id === action.payload.id
       );
       let currentContact = { ...state.contacts[index] };
       currentContact = action.payload.edit;

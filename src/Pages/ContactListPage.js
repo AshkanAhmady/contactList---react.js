@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
-import _ from "lodash";
 import { toast } from "react-toastify";
 import Contact from "../Components/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { deleteContact, sortContact } from "../features/contact/contactSlice";
-// import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
 
 let sort = "desc";
 
 const ContactListPage = () => {
-  const { contacts } = useSelector((state) => state.contacts);
+  const { contacts } = useAppSelector((state) => state.contacts);
   const [filterContact, setFilterContact] = useState([]);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // mounting
-  // useEffect(() => {
-  //   sortListHandler(sort);
-  // }, []);
+  console.log("SDrgsedrg", contacts);
 
   // updating contacts
   useEffect(() => {
@@ -39,7 +34,7 @@ const ContactListPage = () => {
 
   // search method
   const searchHandler = (e) => {
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       setFilterContact(contacts);
     } else {
       let filteredList = contacts.filter((contact) =>
@@ -61,7 +56,7 @@ const ContactListPage = () => {
   const renderContacts = () => {
     let renderValue = <p>Loading ...</p>;
 
-    if (contacts && contacts.length == 0) {
+    if (contacts && contacts.length === 0) {
       renderValue = <p className="emptyList">The contact list is empty !</p>;
     }
 
@@ -69,7 +64,7 @@ const ContactListPage = () => {
       contacts &&
       contacts.length > 0 &&
       filterContact &&
-      filterContact.length == 0
+      filterContact.length === 0
     ) {
       renderValue = <p>Searched Contact Dosen`t Exists !</p>;
     }

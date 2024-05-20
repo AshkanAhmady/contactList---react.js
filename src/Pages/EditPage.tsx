@@ -1,11 +1,7 @@
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-// import {
-//   getSingleRequest,
-//   updateRequest,
-// } from "../Services/HttpRequestMethods";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { updateContact } from "../features/contact/contactSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -13,7 +9,7 @@ const EditPage = () => {
   const [edit, setEdit] = useState({
     name: "",
     email: "",
-    gender: "",
+    gender: "male",
     phone: 0,
     emailPhoneShow: "email",
   });
@@ -21,23 +17,25 @@ const EditPage = () => {
   const selectedContact = useParams();
   let navigate = useNavigate();
 
-  const { contacts } = useSelector((state) => state.contacts);
-  const dispatch = useDispatch();
+  const { contacts } = useAppSelector((state) => state.contacts);
+  const dispatch = useAppDispatch();
 
   // get current contact
   useEffect(() => {
-    let currentContact = contacts.find((item) => item.id == selectedContact.id);
-    setEdit(currentContact);
+    let currentContact = contacts.find(
+      (item) => item.id === +selectedContact.id!
+    );
+    setEdit(currentContact!);
   }, []);
 
-  const changeHandler = (e) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEdit({ ...edit, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // valid PhoneNumber
-    if (edit.phone.length !== 11) {
+    if (edit.phone.toString().length !== 11) {
       toast.error("you should enter valid phone number");
       return;
     }
@@ -64,7 +62,7 @@ const EditPage = () => {
     <div className="updateContact">
       <span className="update_text">
         Update (
-        {edit.gender == "male" ? (
+        {edit.gender === "male" ? (
           <FcBusinessman className="icon" />
         ) : (
           <FcBusinesswoman className="icon" />
@@ -133,7 +131,7 @@ const EditPage = () => {
                 onChange={changeHandler}
                 type="radio"
                 name="emailPhoneShow"
-                checked={edit.emailPhoneShow == "email"}
+                checked={edit.emailPhoneShow === "email"}
                 value="email"
                 id="email"
               />
@@ -145,7 +143,7 @@ const EditPage = () => {
                 onChange={changeHandler}
                 type="radio"
                 name="emailPhoneShow"
-                checked={edit.emailPhoneShow == "phone"}
+                checked={edit.emailPhoneShow === "phone"}
                 value="phone"
                 id="phone"
               />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/reduxHook";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addContact } from "../features/contact/contactSlice";
@@ -16,7 +16,7 @@ const AddContact = () => {
 
   let navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
