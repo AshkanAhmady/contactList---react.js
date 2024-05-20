@@ -36,7 +36,6 @@ const EditPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     // valid PhoneNumber
     if (edit.phone.length !== 11) {
       toast.error("you should enter valid phone number");

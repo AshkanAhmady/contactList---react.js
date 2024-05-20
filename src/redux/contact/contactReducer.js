@@ -1,5 +1,3 @@
-import { ADD, SORT, DELETE, UPDATE } from "./contactType";
-import _ from "lodash";
 const initialState = [];
 
 const contactReducer = (state = initialState, action) => {

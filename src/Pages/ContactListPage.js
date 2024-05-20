@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import Contact from "../Conponents/Contact";
+import Contact from "../Components/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact, sortContact } from "../features/contact/contactSlice";
