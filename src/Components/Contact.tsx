@@ -3,13 +3,16 @@ import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { ContactType } from "../types";
 
-const Contact = ({ contact, onDelete }) => {
+type ContactProps = { contact: ContactType; onDelete: any };
+
+const Contact: React.FC<ContactProps> = ({ contact, onDelete }) => {
   return (
     <div className="single_contact">
       <div className="details">
         <div className="avatar">
-          {contact.gender == "male" ? (
+          {contact.gender === "male" ? (
             <FcBusinessman className="icon" />
           ) : (
             <FcBusinesswoman className="icon" />
@@ -17,7 +20,7 @@ const Contact = ({ contact, onDelete }) => {
         </div>
         <div className="name_email">
           <h3>{contact.name}</h3>
-          {contact.emailPhoneShow == "email" ? (
+          {contact.emailPhoneShow === "email" ? (
             <span>{contact.email}</span>
           ) : (
             <span>{contact.phone}</span>
@@ -30,7 +33,6 @@ const Contact = ({ contact, onDelete }) => {
           // static => send data to another Route
           to={{
             pathname: `/edit/${contact.id}`,
-            state: { contact: contact },
           }}
         >
           <Tippy content="Edit Contact">

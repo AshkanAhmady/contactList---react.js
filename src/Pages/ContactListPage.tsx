@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
-import _ from "lodash";
+import { ReactElement, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Contact from "../Conponents/Contact";
+import Contact from "../Components/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { deleteContact, sortContact } from "../features/contact/contactSlice";
-// import { deleteRequest, getRequest } from "../Services/HttpRequestMethods";
+import { ContactType } from "../types";
 
 let sort = "desc";
 
 const ContactListPage = () => {
-  const { contacts } = useSelector((state) => state.contacts);
-  const [filterContact, setFilterContact] = useState([]);
+  const { contacts } = useAppSelector((state) => state.contacts);
+  const [filterContact, setFilterContact] = useState<ContactType[] | []>([]);
 
-  const dispatch = useDispatch();
-
-  // mounting
-  // useEffect(() => {
-  //   sortListHandler(sort);
-  // }, []);
+  const dispatch = useAppDispatch();
 
   // updating contacts
   useEffect(() => {
@@ -26,20 +20,20 @@ const ContactListPage = () => {
   }, [contacts]);
 
   // delete content
-  const deleteHandler = (id) => {
+  const deleteHandler = (id: number) => {
     dispatch(deleteContact({ id, sort }));
     toast.success("Contact Deleted 👌");
   };
 
   // sort list
-  const sortListHandler = (sortValue) => {
+  const sortListHandler = (sortValue: "asc" | "desc") => {
     dispatch(sortContact(sortValue));
     sort = sortValue;
   };
 
   // search method
-  const searchHandler = (e) => {
-    if (e.target.value == "") {
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === "") {
       setFilterContact(contacts);
     } else {
       let filteredList = contacts.filter((contact) =>
@@ -59,9 +53,9 @@ const ContactListPage = () => {
 
   // render elements
   const renderContacts = () => {
-    let renderValue = <p>Loading ...</p>;
+    let renderValue: ReactElement | ReactElement[] = <p>Loading ...</p>;
 
-    if (contacts && contacts.length == 0) {
+    if (contacts && contacts.length === 0) {
       renderValue = <p className="emptyList">The contact list is empty !</p>;
     }
 
@@ -69,7 +63,7 @@ const ContactListPage = () => {
       contacts &&
       contacts.length > 0 &&
       filterContact &&
-      filterContact.length == 0
+      filterContact.length === 0
     ) {
       renderValue = <p>Searched Contact Dosen`t Exists !</p>;
     }
@@ -78,7 +72,7 @@ const ContactListPage = () => {
       renderValue = filterContact.map((c) => {
         return (
           <Contact
-            onDelete={() => deleteHandler(c.id)}
+            onDelete={() => deleteHandler(c.id!)}
             key={c.id}
             contact={c}
           />

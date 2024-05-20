@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/reduxHook";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addContact } from "../features/contact/contactSlice";
-// import { addRequest } from "../Services/HttpRequestMethods";
 
 const AddContact = () => {
   const [contact, setContact] = useState({
@@ -16,14 +15,14 @@ const AddContact = () => {
 
   let navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const changeHandler = (e) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
   // create contact
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(addContact(contact));
     toast.success("New Contact Added 👌");
