@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Contact from "../Components/Contact";
 import { FcGenericSortingAsc, FcGenericSortingDesc } from "react-icons/fc";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { deleteContact, sortContact } from "../features/contact/contactSlice";
+import { ContactType } from "../types";
 
 let sort = "desc";
 
 const ContactListPage = () => {
   const { contacts } = useAppSelector((state) => state.contacts);
-  const [filterContact, setFilterContact] = useState([]);
+  const [filterContact, setFilterContact] = useState<ContactType[] | []>([]);
 
   const dispatch = useAppDispatch();
-
-  console.log("SDrgsedrg", contacts);
 
   // updating contacts
   useEffect(() => {
@@ -21,19 +20,19 @@ const ContactListPage = () => {
   }, [contacts]);
 
   // delete content
-  const deleteHandler = (id) => {
+  const deleteHandler = (id: number) => {
     dispatch(deleteContact({ id, sort }));
     toast.success("Contact Deleted 👌");
   };
 
   // sort list
-  const sortListHandler = (sortValue) => {
+  const sortListHandler = (sortValue: "asc" | "desc") => {
     dispatch(sortContact(sortValue));
     sort = sortValue;
   };
 
   // search method
-  const searchHandler = (e) => {
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setFilterContact(contacts);
     } else {
@@ -54,7 +53,7 @@ const ContactListPage = () => {
 
   // render elements
   const renderContacts = () => {
-    let renderValue = <p>Loading ...</p>;
+    let renderValue: ReactElement | ReactElement[] = <p>Loading ...</p>;
 
     if (contacts && contacts.length === 0) {
       renderValue = <p className="emptyList">The contact list is empty !</p>;
@@ -73,7 +72,7 @@ const ContactListPage = () => {
       renderValue = filterContact.map((c) => {
         return (
           <Contact
-            onDelete={() => deleteHandler(c.id)}
+            onDelete={() => deleteHandler(c.id!)}
             key={c.id}
             contact={c}
           />
