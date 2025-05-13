@@ -89,7 +89,7 @@ const ContactListPage = () => {
         <span>Contacts list</span>
 
         {contacts && contacts.length > 0 && (
-          <div className="contactList_options">
+          <div className="contactList_options" data-testid="contact-item">
             <input
               onChange={searchHandler}
               placeholder="Search..."
