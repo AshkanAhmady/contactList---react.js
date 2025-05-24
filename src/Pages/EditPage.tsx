@@ -59,7 +59,7 @@ const EditPage = () => {
   };
 
   return (
-    <div className="updateContact">
+    <div className="updateContact" data-testid="update-rout">
       <span className="update_text">
         Update (
         {edit.gender === "male" ? (

@@ -2,18 +2,29 @@ import { render, RenderOptions } from "@testing-library/react";
 import { PropsWithChildren, ReactElement } from "react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import contactReducer from "../features/contact/contactSlice";
 import { RootState } from "../features/store";
-import { MemoryRouter } from "react-router-dom";
 
-type CustomRenderOptions = Omit<RenderOptions, "wrapper">;
+type CustomRenderOptions = {
+  preloadedState?: Partial<RootState>;
+  route?: string;
+  path?: string;
+  elementPath?: ReactElement;
+} & Omit<RenderOptions, "wrapper">;
 
-const renderWithProviders = (
+export const renderWithProviders = (
   ui: ReactElement,
   {
     preloadedState,
+    route = "/",
+    path,
+    elementPath,
     ...renderOptions
-  }: CustomRenderOptions & { preloadedState?: Partial<RootState> } = {}
+  }: CustomRenderOptions = {}
 ) => {
   const store = configureStore({
     reducer: {
@@ -24,7 +35,17 @@ const renderWithProviders = (
 
   const Wrapper = ({ children }: PropsWithChildren) => (
     <Provider store={store}>
-      <MemoryRouter>{children}</MemoryRouter>
+      <MemoryRouter initialEntries={[route]}>
+        <ToastContainer />
+        {path && elementPath ? (
+          <Routes>
+            <Route path={path} element={elementPath} />
+            <Route path="*" element={children} />
+          </Routes>
+        ) : (
+          children
+        )}
+      </MemoryRouter>
     </Provider>
   );
 
@@ -32,4 +53,3 @@ const renderWithProviders = (
 };
 
 export * from "@testing-library/react";
-export { renderWithProviders };

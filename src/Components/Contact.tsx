@@ -9,7 +9,7 @@ type ContactProps = { contact: ContactType; onDelete: any };
 
 const Contact: React.FC<ContactProps> = ({ contact, onDelete }) => {
   return (
-    <div className="single_contact">
+    <div className="single_contact" data-testid="single_contact">
       <div className="details">
         <div className="avatar">
           {contact.gender === "male" ? (
@@ -34,6 +34,11 @@ const Contact: React.FC<ContactProps> = ({ contact, onDelete }) => {
           to={{
             pathname: `/edit/${contact.id}`,
           }}
+          // برای اینکه ریکت تستینگ نام این لینک را پیدا کنه
+          // اینجا فقط تولتیپ ایجاد میشه و متنش داخل دام نیست پس با این اسم قابل
+          // دسترسی برای تست نیست
+
+          aria-label="Edit Contact"
         >
           <Tippy content="Edit Contact">
             <div>
@@ -41,7 +46,11 @@ const Contact: React.FC<ContactProps> = ({ contact, onDelete }) => {
             </div>
           </Tippy>
         </Link>
-        <FaTrashAlt onClick={onDelete} className="icon" />
+        <FaTrashAlt
+          onClick={onDelete}
+          className="icon"
+          data-testid="delete-icon"
+        />
       </div>
     </div>
   );
