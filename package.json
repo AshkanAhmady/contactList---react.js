@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
+    "@testing-library/user-event": "^14.6.1",
     "@tippyjs/react": "^4.2.6",
     "lodash": "^4.17.21",
     "react": "^18.0.0",
